@@ -1,0 +1,54 @@
+﻿<Window x:Class="prac16.AdminChatPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:prac16"
+        mc:Ignorable="d"
+        Title="AdminChatPanel" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+            <ListBox x:Name="Display" />
+        </ScrollViewer>
+        <Button x:Name="SendMessage" Grid.Row="2"  Grid.Column="1" Content="Send Message" Margin="5" Click="SendMessage_Click" IsDefault="True"/>
+        <ScrollViewer  Grid.Row="1" Grid.Column="0" Grid.RowSpan="3">
+            <ListBox x:Name="DisplayUsers"/>
+        </ScrollViewer>
+        <Label Grid.Row="0" Grid.Column="0" Content="Users:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <TextBox x:Name="MessageInput" Grid.Row="3" Grid.Column="1" Margin="5">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Input Your message down here" Foreground="Gray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Frame x:Name="ChatLogsDisplay" Grid.Row="0" Grid.RowSpan="4" Grid.Column="0"/>
+    </Grid>
+</Window>

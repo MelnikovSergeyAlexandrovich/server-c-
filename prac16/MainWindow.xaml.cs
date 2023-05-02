@@ -32,7 +32,7 @@ namespace prac16
         {
             if (Regex.IsMatch(InputLogin.Text,regexLogin.ToString()) && Regex.IsMatch(InputIP.Text, regexIP.ToString()))
             {
-                UserChatPanel win = new UserChatPanel(InputIP.Text);
+                UserChatPanel win = new UserChatPanel(InputIP.Text, InputLogin.Text);
                 win.Show();
                 this.Visibility = Visibility.Collapsed;
             }

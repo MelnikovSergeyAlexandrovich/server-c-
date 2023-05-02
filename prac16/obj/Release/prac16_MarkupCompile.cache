@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\
+C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Release\
 prac16
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\я\Source\Repos\ker1xx\prac16\prac16\App.xaml
 3-2019136715
 
@@ -16,5 +16,5 @@ C:\Users\я\Source\Repos\ker1xx\prac16\prac16\App.xaml
 13-1310406943
 AdminChatPanel.xaml;MainWindow.xaml;UserChatPanel.xaml;
 
-False
+True
 

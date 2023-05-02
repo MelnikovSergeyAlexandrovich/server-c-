@@ -21,11 +21,12 @@ namespace prac16
     /// </summary>
     public partial class UserChatPanel : Window
     {
+        private string Login;
         private Socket server;
-        public UserChatPanel(string IP)
+        public UserChatPanel(string IP, string Login)
         {
             InitializeComponent();
-
+            this.Login = Login;
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             server.ConnectAsync(IP, 8888);
             Receive();
@@ -36,8 +37,9 @@ namespace prac16
             {
                 byte[] bytes = new byte[1024];
                 await server.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
-                Display.Items.Add(Encoding.UTF8.GetString(bytes));
-                DisplayUsers.Items.Add(server.RemoteEndPoint);
+                string message = Encoding.UTF8.GetString(bytes);
+                Display.Items.Add(message);
+                DisplayUsers.Items.Add(server.RemoteEndPoint.ToString());
             }
         }
         private async Task Send(string message)
@@ -48,7 +50,7 @@ namespace prac16
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            Send(MessageInput.Text);
+            Send(MessageInput.Text + " /username= " + Login);
         }
     }
 }

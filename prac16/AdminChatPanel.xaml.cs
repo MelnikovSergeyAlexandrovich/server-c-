@@ -28,7 +28,7 @@ namespace prac16
             IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, 8888);
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             socket.Bind(ipPoint);
-            Socket.Listen(1000);
+            socket.Listen(1000);
 
             ListenToClients();
         }
@@ -37,8 +37,36 @@ namespace prac16
             while (true)
             {
                 var client = await socket.AcceptAsync();
-                clients.Add(client)
+                clients.Add(client);
+
+                RecieveMessage(client);
             }
+        }
+        private async Task RecieveMessage(Socket client)
+        {
+            while (true)
+            {
+                byte[] bytes = new byte[1024];
+                await client.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
+                string message = Encoding.UTF8.GetString(bytes);
+                string username = "";
+                if (message.Contains("/username"))
+                {
+                    username = message.Substring(message.LastIndexOf("/username"));
+                    username = username.Remove(0,11);
+                    message = message.Remove(message.LastIndexOf("/username"));
+                    message = DateTime.Now.ToString("HH:mm") + "\t" + username +"\n" + message;
+                }
+                Display.Items.Add($"Time of sending:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP:{client.RemoteEndPoint} \nmessage sended to clients:\n{message}");
+                foreach (var item in clients)
+                    SendMessage(item, message);
+            }
+
+        }
+        private async Task SendMessage(Socket client, string message)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(message);
+            await client.SendAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
         }
 
     }

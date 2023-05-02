@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,55 +20,34 @@ namespace prac16
 
     public partial class AdminChatPanel : Window
     {
-        private Socket socket;
-        private List<Socket> clients = new List<Socket>();
-
-        public AdminChatPanel()
+        ServerLogic Server;
+        ClientLogic Client;
+        public AdminChatPanel(string Login)
         {
             InitializeComponent();
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, 8888);
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Bind(ipPoint);
-            socket.Listen(1000);
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Server = new ServerLogic(socket);
 
-            ListenToClients();
+            var socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Client = new ClientLogic(Login, socketClient, "127.0.0.1");
+
+            ServerLogic.usersnames.Add($"[{Login}]");
+            Server.ListenToClients();
         }
-        private async Task ListenToClients()
+
+        private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            while (true)
-            {
-                var client = await socket.AcceptAsync();
-                clients.Add(client);
-
-                RecieveMessage(client);
-            }
+            Send(MessageInput.Text + " /username= " + Client.Login);
+            Thread.Sleep(1000);
+            Display.ItemsSource = "";
+            Display.ItemsSource = ClientLogic.messages;
+            DisplayUsers.ItemsSource = "";
+            DisplayUsers.ItemsSource = ServerLogic.usersnames;
         }
-        private async Task RecieveMessage(Socket client)
-        {
-            while (true)
-            {
-                byte[] bytes = new byte[1024];
-                await client.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
-                string message = Encoding.UTF8.GetString(bytes);
-                string username = "";
-                if (message.Contains("/username"))
-                {
-                    username = message.Substring(message.LastIndexOf("/username"));
-                    username = username.Remove(0,11);
-                    message = message.Remove(message.LastIndexOf("/username"));
-                    message = DateTime.Now.ToString("HH:mm") + "\t" + username +"\n" + message;
-                }
-                Display.Items.Add($"Time of sending:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP:{client.RemoteEndPoint} \nmessage sended to clients:\n{message}");
-                foreach (var item in clients)
-                    SendMessage(item, message);
-            }
-
-        }
-        private async Task SendMessage(Socket client, string message)
+        private async Task Send(string message)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(message);
-            await client.SendAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
+            await Client.server.SendAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
         }
-
     }
 }

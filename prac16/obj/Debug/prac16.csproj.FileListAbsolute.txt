@@ -36,3 +36,5 @@ C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.g.resources
 C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.Properties.Resources.resources
 C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.csproj.GenerateResource.cache
 C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.csproj.CoreCompileInputs.cache
+C:\Users\klink\source\C++ repos\prac16\prac16\obj\Debug\AdminChatPanel.baml
+C:\Users\klink\source\C++ repos\prac16\prac16\obj\Debug\UserChatPanel.baml

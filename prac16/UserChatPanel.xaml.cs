@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,36 +22,28 @@ namespace prac16
     /// </summary>
     public partial class UserChatPanel : Window
     {
-        private string Login;
-        private Socket server;
+        ClientLogic Client;
         public UserChatPanel(string IP, string Login)
         {
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Client = new ClientLogic(Login, socket, IP);
             InitializeComponent();
-            this.Login = Login;
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            server.Connect(IP, 8888);
-            Receive();
-        }
-        private async Task Receive()
-        {
-            while (true)
-            {
-                byte[] bytes = new byte[1024];
-                await server.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
-                string message = Encoding.UTF8.GetString(bytes);
-                Display.Items.Add(message);
-                DisplayUsers.Items.Add(server.RemoteEndPoint.ToString());
-            }
-        }
-        private async Task Send(string message)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(message);
-            await server.SendAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
+            MessageInput.Focus();
+            Client.Receive();
+            Client.Send($"{Login} подключился к чятику ^_^ /connect_username= {Login}");
         }
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)
         {
-            Send(MessageInput.Text + " /username= " + Login);
+            if (!String.IsNullOrWhiteSpace(MessageInput.Text))
+                Client.Send(MessageInput.Text + " /username= " + Client.Login);
+            MessageInput.Focus();
+            MessageInput.Text = null;
+            Thread.Sleep(500);
+            Display.ItemsSource = "";
+            Display.ItemsSource = ClientLogic.messages;
+            DisplayUsers.ItemsSource = "";
+            DisplayUsers.ItemsSource = ServerLogic.usersnames;
         }
     }
 }

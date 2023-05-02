@@ -36,16 +36,20 @@ namespace prac16
                 win.Show();
                 this.Visibility = Visibility.Collapsed;
             }
+            else
+                MessageBox.Show("Ошибка валидации!");
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             if (Regex.IsMatch(InputLogin.Text, regexLogin.ToString()))
             {
-                AdminChatPanel win = new AdminChatPanel();
+                AdminChatPanel win = new AdminChatPanel(InputLogin.Text);
                 win.Show();
                 this.Visibility = Visibility.Collapsed;
             }
+            else
+                MessageBox.Show("Ошибка валидации!");
         }
     }
 }

@@ -58,6 +58,8 @@
     <Compile Include="AdminChatPanel.xaml.cs">
       <DependentUpon>AdminChatPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClientLogic.cs" />
+    <Compile Include="ServerLogic.cs" />
     <Compile Include="UserChatPanel.xaml.cs">
       <DependentUpon>UserChatPanel.xaml</DependentUpon>
     </Compile>

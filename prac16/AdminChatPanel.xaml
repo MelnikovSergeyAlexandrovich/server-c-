@@ -17,11 +17,13 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
             <ListBox x:Name="Display" />
         </ScrollViewer>
-        <Button x:Name="SendMessageButton" Grid.Row="2"  Grid.Column="1" Content="Send Message" Margin="5" IsDefault="True"/>
-        <ScrollViewer  Grid.Row="1" Grid.Column="0" Grid.RowSpan="3">
+        <Button x:Name="SendMessageButton" Grid.Row="2"  Grid.Column="1" Content="Send Message" Margin="5" IsDefault="True" Click="SendMessageButton_Click"/>
+        <Button x:Name="CloseButton" Grid.Row="3" Grid.Column="0" Margin="5" Content="Close Chat"/>
+        <Button x:Name="OpenLogsButton" Grid.Row="0" Grid.Column="1" Margin="5" Content="Open Chat Logs" MaxWidth="300"/>
+        <ScrollViewer  Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <ListBox x:Name="DisplayUsers"/>
         </ScrollViewer>
         <Label Grid.Row="0" Grid.Column="0" Content="Users:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>

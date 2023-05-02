@@ -40,7 +40,7 @@ namespace prac16
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Regex.IsMatch(InputLogin.Text, regexLogin.ToString()) && Regex.IsMatch(InputIP.Text, regexIP.ToString()))
+            if (Regex.IsMatch(InputLogin.Text, regexLogin.ToString()))
             {
                 AdminChatPanel win = new AdminChatPanel();
                 win.Show();

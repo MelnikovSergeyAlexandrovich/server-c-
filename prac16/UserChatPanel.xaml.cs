@@ -39,6 +39,7 @@ namespace prac16
                 await server.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
                 string message = Encoding.UTF8.GetString(bytes);
                 Display.Items.Add(message);
+                DisplayUsers.Items.Add(server.RemoteEndPoint.ToString());
             }
         }
         private async Task Send(string message)

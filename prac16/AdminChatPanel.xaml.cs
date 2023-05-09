@@ -22,27 +22,25 @@ namespace prac16
     {
         ServerLogic Server;
         ClientLogic Client;
-        public AdminChatPanel(string Login)
+        MainWindow MainWindow;
+        public AdminChatPanel(string Login, MainWindow mainWindow)
         {
             InitializeComponent();
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Server = new ServerLogic(socket);
+            Server = new ServerLogic(socket, DisplayUsers, Display);
 
             var socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Client = new ClientLogic(Login, socketClient, "127.0.0.1");
+            Client = new ClientLogic(Login, socketClient, "127.0.0.1", Display, DisplayUsers);
 
-            ServerLogic.usersnames.Add($"[{Login}]");
+            DisplayUsers.Items.Add($"[{Login}]");
             Server.ListenToClients();
+            MainWindow = mainWindow;
         }
 
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
             Send(MessageInput.Text + " /username= " + Client.Login);
-            Thread.Sleep(1000);
-            Display.ItemsSource = "";
-            Display.ItemsSource = ClientLogic.messages;
-            DisplayUsers.ItemsSource = "";
-            DisplayUsers.ItemsSource = ServerLogic.usersnames;
+            Thread.Sleep(5);
         }
         private async Task Send(string message)
         {

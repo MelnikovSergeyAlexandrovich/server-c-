@@ -6,17 +6,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace prac16
 {
     internal class ServerLogic
     {
+        public ListBox userBox;
+        public ListBox box;
         public Socket socket;
         public List<Socket> clients = new List<Socket>();
-        public static List<string> usersnames = new List<string>();
-        public ServerLogic(Socket socket)
+        public ServerLogic(Socket socket, ListBox userBox, ListBox box)
         {
             this.socket = socket;
+            this.userBox = userBox;
+            this.box = box;
             IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, 8888);
             socket.Bind(ipPoint);
             socket.Listen(1000);
@@ -38,12 +42,18 @@ namespace prac16
                 await client.ReceiveAsync(new ArraySegment<byte>(bytes), SocketFlags.None);
                 string message = Encoding.UTF8.GetString(bytes);
                 string username = "";
-                if (message.Contains("/username"))
+                if (message.Contains("/username") && !message.Contains("/exit"))
                 {
                     username = message.Substring(message.LastIndexOf("/username"));
                     username = username.Remove(0, 11);
                     message = message.Remove(message.LastIndexOf("/username"));
                     message = DateTime.Now.ToString("HH:mm") + "\t" + username + "\n" + message;
+                }
+                if (message.Contains("/exit /username= ") || message == ("/disconnect"))
+                {
+                    username = message.Substring(message.LastIndexOf("/username= "));
+                    message = DateTime.Now.ToString("HH:mm") + "\t" + username + "\n" + " покинул чятик ;-(";
+                    userBox.Items.Remove($"[{username}]");
                 }
                 if (message.Contains("/connect_username"))
                 {
@@ -51,10 +61,10 @@ namespace prac16
                     username = message.Substring(message.LastIndexOf("/connect_username"));
                     username = username.Remove(0, 19);
                     message = message.Remove(message.LastIndexOf("/connect_username"));
-                    usersnames.Add("[username]");
+                    userBox.Items.Add($"[{username}]");
                     message = messageWithTag;
                 }
-                ClientLogic.messages.Add($"Time of sending:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP:{client.RemoteEndPoint} \nmessage sended to clients:\n{message}");
+                box.Items.Add($"Time of sending:{DateTime.Now.ToString("HH:mm:ss")}\tsenderIP:{client.RemoteEndPoint} \nmessage sended to clients:\n{message}");
                 foreach (var item in clients)
                     SendMessage(item, message);
             }

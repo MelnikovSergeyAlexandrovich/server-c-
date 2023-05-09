@@ -23,13 +23,15 @@ namespace prac16
     public partial class UserChatPanel : Window
     {
         ClientLogic Client;
-        public UserChatPanel(string IP, string Login)
+        MainWindow MainWindow;
+        public UserChatPanel(string IP, string Login, MainWindow MainWindow)
         {
-            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Client = new ClientLogic(Login, socket, IP);
             InitializeComponent();
+            this.MainWindow = MainWindow;
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            Client = new ClientLogic(Login, socket, IP, this.Display, this.DisplayUsers);
             MessageInput.Focus();
-            Client.Receive();
+            Client.Receive(Client.isWroking.Token);
             Client.Send($"{Login} подключился к чятику ^_^ /connect_username= {Login}");
         }
 
@@ -39,11 +41,13 @@ namespace prac16
                 Client.Send(MessageInput.Text + " /username= " + Client.Login);
             MessageInput.Focus();
             MessageInput.Text = null;
-            Thread.Sleep(500);
-            Display.ItemsSource = "";
-            Display.ItemsSource = ClientLogic.messages;
-            DisplayUsers.ItemsSource = "";
-            DisplayUsers.ItemsSource = ServerLogic.usersnames;
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Client.Send($"/exit /username= {Client.Login}");
+            Environment.Exit(0);
+        }
+
     }
 }

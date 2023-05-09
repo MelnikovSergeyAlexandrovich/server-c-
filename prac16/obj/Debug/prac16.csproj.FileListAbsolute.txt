@@ -38,3 +38,33 @@ C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.csproj.GenerateRe
 C:\Users\я\Source\Repos\ker1xx\prac16\prac16\obj\Debug\prac16.csproj.CoreCompileInputs.cache
 C:\Users\klink\source\C++ repos\prac16\prac16\obj\Debug\AdminChatPanel.baml
 C:\Users\klink\source\C++ repos\prac16\prac16\obj\Debug\UserChatPanel.baml
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\prac16.exe.config
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\prac16.exe
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\prac16.pdb
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\MaterialDesignColors.dll
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\MaterialDesignColors.pdb
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\User\Source\Repos\serversC#\prac16\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.csproj.AssemblyReference.cache
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\AdminChatPanel.g.cs
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\MainWindow.g.cs
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\UserChatPanel.g.cs
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\App.g.cs
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16_MarkupCompile.cache
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16_MarkupCompile.lref
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\App.baml
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\AdminChatPanel.baml
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\MainWindow.baml
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\UserChatPanel.baml
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.g.resources
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.Properties.Resources.resources
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.csproj.GenerateResource.cache
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.csproj.CoreCompileInputs.cache
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.csproj.CopyComplete
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.exe
+C:\Users\User\Source\Repos\serversC#\prac16\obj\Debug\prac16.pdb

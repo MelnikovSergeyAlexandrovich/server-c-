@@ -32,7 +32,7 @@ namespace prac16
             Client = new ClientLogic(Login, socket, IP, this.Display, this.DisplayUsers);
             MessageInput.Focus();
             Client.Receive(Client.isWroking.Token);
-            Client.Send($"{Login} подключился к чятику ^_^ /connect_username= {Login}");
+            Client.Send($"{Login} подключился к чатику инвесторов! ^_^ (futures<3) /connect_username= {Login}");
         }
 
         private void SendMessage_Click(object sender, RoutedEventArgs e)
